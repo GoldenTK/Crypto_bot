@@ -1,8 +1,9 @@
 const request = require('request-promise-native');
 
-const API_TOKEN = "EAAaGGnZCmjNcBAEKM3wqg7DZBzvxSZAf6aX8LP1SZBgJ4XfNacZCH6IrgBhHzTk3rTTPTaciFvKyhzGCEBAJzQvNuIBC7fzWczqzZCldEBTjBxjhH6ZBzIJmmKzWut73CZBF7AKtgZChRurjAvEK63B9MBIwXT6Y9FZBWtbGphnqZC3YgZDZD";
-const USER_ID = "+48511621833";
-const CRYPTO_CURRENCY = "bitcoin";
+const API_TOKEN = "your_api_token";
+const USER_ID = "your_phone_number";
+const CRYPTO_CURRENCY = "your_crypto_currency";
+const TIME_OUT = "600000";
 
 const getPrice = (coin, currency) => {
     return request(`https://api.coinmarketcap.com/v1/ticker/${coin}/?convert=${currency}`).then(data => {
@@ -22,10 +23,10 @@ const sendMessage = (token, userId, message) => {
 
 let wait = ms => new Promise(resolve => setTimeout(resolve, ms));
 
-const sendInfo = async (token, userId, cryptoCurrency) => {
+const sendInfo = async (token, userId, cryptoCurrency, timeOut) => {
     const previousPrice = await getPrice(cryptoCurrency, 'PLN');
     console.log(`INFO: Previous price ${cryptoCurrency}: ${previousPrice}`);
-    await wait(100000);
+    await wait(timeOut);
     const actualPrice = await getPrice(cryptoCurrency, 'PLN');
     console.log(`INFO: Actual price ${cryptoCurrency}: ${actualPrice}`);
 
@@ -41,6 +42,4 @@ const sendInfo = async (token, userId, cryptoCurrency) => {
     }
 };
 
-while(true) {
-    sendInfo(API_TOKEN, USER_ID, CRYPTO_CURRENCY);
-}
+sendInfo(API_TOKEN, USER_ID, CRYPTO_CURRENCY, TIME_OUT);
