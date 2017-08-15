@@ -1,8 +1,8 @@
 const request = require('request-promise-native');
 
-const API_TOKEN = "your_api_token";
-const USER_ID = "your_phone_number";
-const CRYPTO_CURRENCY = "your_crypto_currency";
+const API_TOKEN = "EAAaGGnZCmjNcBAEKM3wqg7DZBzvxSZAf6aX8LP1SZBgJ4XfNacZCH6IrgBhHzTk3rTTPTaciFvKyhzGCEBAJzQvNuIBC7fzWczqzZCldEBTjBxjhH6ZBzIJmmKzWut73CZBF7AKtgZChRurjAvEK63B9MBIwXT6Y9FZBWtbGphnqZC3YgZDZD";
+const USER_ID = "+48511621833";
+const CRYPTO_CURRENCY = "litecoin";
 const TIME_OUT = "600000";
 
 const getPrice = (coin, currency) => {
@@ -33,6 +33,10 @@ const sendInfo = async (token, userId, cryptoCurrency, timeOut) => {
     const pricesLength = previousPrice.length > actualPrice.length ? previousPrice.length : actualPrice.length;
 
     for (let i = 0; i < pricesLength; i++) {
+
+        previousPrice[i] = parseFloat(previousPrice[i]).toFixed(2); 
+        actualPrice[i] = parseFloat(actualPrice[i]).toFixed(2);
+
         if (previousPrice[i] !== actualPrice[i]) {
             const message = `${cryptoCurrency}: ${actualPrice[i]}`;
             sendMessage(token, userId, message).then(() => {
