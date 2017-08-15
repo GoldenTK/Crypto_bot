@@ -2,8 +2,9 @@ const request = require('request-promise-native');
 
 const API_TOKEN = "your_api_token";
 const USER_ID = "your_phone_number"; //Example: "+48452353934"
-const CRYPTO_CURRENCY = "your_currency"; //Example: "bitcoin", "litecoin"
+const CRYPTO_CURRENCY = "your_crypto_currency"; //Example: "bitcoin", "litecoin"
 const TIME_OUT = "600000";
+const CURRENCY = 'your_currency'; // Example: "EUR", "USD"
 
 const getPrice = (coin, currency) => {
     return request(`https://api.coinmarketcap.com/v1/ticker/${coin}/?convert=${currency}`).then(data => {
@@ -23,11 +24,11 @@ const sendMessage = (token, userId, message) => {
 
 let wait = ms => new Promise(resolve => setTimeout(resolve, ms));
 
-const sendInfo = async (token, userId, cryptoCurrency, timeOut) => {
-    const previousPrice = await getPrice(cryptoCurrency, 'PLN');
+const sendInfo = async (token, userId, cryptoCurrency, currency, timeOut) => {
+    const previousPrice = await getPrice(cryptoCurrency, currency);
     console.log(`INFO: Previous price ${cryptoCurrency}: ${previousPrice}`);
     await wait(timeOut);
-    const actualPrice = await getPrice(cryptoCurrency, 'PLN');
+    const actualPrice = await getPrice(cryptoCurrency, currency);
     console.log(`INFO: Actual price ${cryptoCurrency}: ${actualPrice}`);
 
     const pricesLength = previousPrice.length > actualPrice.length ? previousPrice.length : actualPrice.length;
@@ -46,4 +47,4 @@ const sendInfo = async (token, userId, cryptoCurrency, timeOut) => {
     }
 };
 
-sendInfo(API_TOKEN, USER_ID, CRYPTO_CURRENCY, TIME_OUT);
+sendInfo(API_TOKEN, USER_ID, CRYPTO_CURRENCY, CURRENCY, TIME_OUT);
