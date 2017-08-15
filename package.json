@@ -1,0 +1,16 @@
+{
+  "name": "crypto_bot",
+  "version": "1.0.0",
+  "description": "bot with cryptocurrency price work in messenger app",
+  "main": "app.js",
+  "scripts": {
+    "run": "forever start app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "TK",
+  "license": "ISC",
+  "dependencies": {
+    "request": "^2.81.0",
+    "request-promise-native": "^1.0.4"
+  }
+}
