@@ -1,8 +1,8 @@
 const request = require('request-promise-native');
 
-const API_TOKEN = "EAAaGGnZCmjNcBAEKM3wqg7DZBzvxSZAf6aX8LP1SZBgJ4XfNacZCH6IrgBhHzTk3rTTPTaciFvKyhzGCEBAJzQvNuIBC7fzWczqzZCldEBTjBxjhH6ZBzIJmmKzWut73CZBF7AKtgZChRurjAvEK63B9MBIwXT6Y9FZBWtbGphnqZC3YgZDZD";
-const USER_ID = "+48511621833";
-const CRYPTO_CURRENCY = "litecoin";
+const API_TOKEN = "your_api_token";
+const USER_ID = "your_phone_number"; //Example: "+48452353934"
+const CRYPTO_CURRENCY = "your_currency"; //Example: "bitcoin", "litecoin"
 const TIME_OUT = "600000";
 
 const getPrice = (coin, currency) => {
